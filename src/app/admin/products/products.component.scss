@@ -1,0 +1,88 @@
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-img-top {
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+}
+
+.modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+}
+
+[style*="border-style: dashed "] {
+  transition: all 0.3s ease;
+  &:hover {
+    border-color: #4b1c2d !important;
+    background-color: rgba(157, 39, 39, 0.05);
+  }
+}
+.form-check-input:checked {
+  background-color: #4b1c2d !important;
+  border-color: #4b1c2d !important;
+}
+
+.form-check-input:focus {
+  border-color: #4b1c2d !important;
+  box-shadow: 0 0 0 0.25rem rgba(75, 28, 45, 0.5) !important; 
+
+}
+
+.btn-maroon {
+  background-color: #4b1c2d;
+  color: white;
+  transition: all 0.3s ease;
+  border: 2px solid #4b1c2d;
+  margin-left: 20px;
+  border-radius: 4px;
+  font-weight: 600;
+
+
+}
+.btn-maroon:hover{
+  background-color: white;
+  color: #4b1c2d;
+  transform: translateY(-2px);
+}
+.btn-outline-maroon {
+  border: 2px solid #4b1c2d;
+  color: #4b1c2d;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-maroon:hover {
+  background-color: #4b1c2d;
+  color: white;
+  transform: translateY(-2px);
+}
+.colorr{
+  color: #4b1c2d !important;
+
+}

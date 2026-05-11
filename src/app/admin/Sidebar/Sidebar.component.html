@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row flex-row-reverse">
+    <div class="col-md-3 col-lg-2 bg-light p-3" style="height: calc(100vh - 5cm); overflow-y: auto;">
+      <h5 class="text-end">لوحة التحكم</h5>
+      <ul class="nav flex-column text-end">
+        <li class="nav-item mb-2">
+          <a routerLink="/admin" routerLinkActive="fw-bold " class="nav-link">الصفحة الرئيسية 🏠</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="products" routerLinkActive="fw-bold " class="nav-link">المنتجات 📦 </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="offers" routerLinkActive="fw-bold " class="nav-link">العروض 💸</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="categories" routerLinkActive="fw-bold " class="nav-link">الأصناف 📁</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-9 col-lg-10 p-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
