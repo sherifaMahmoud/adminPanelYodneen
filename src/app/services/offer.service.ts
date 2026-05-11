@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfferService {
-  private apiUrl = 'http://localhost:5095/api/Offers'; // URL الخاص بـ API العروض
+  private apiUrl = `${environment.apiUrl}/api/Offers`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // جلب العروض
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
   getOffers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
-  // إضافة عرض جديد
   addOffer(offer: any): Observable<any> {
-    return this.http.post(this.apiUrl, offer);
+    return this.http.post(this.apiUrl, offer, { headers: this.getHeaders() });
   }
 
-  // حذف عرض
   deleteOffer(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 }

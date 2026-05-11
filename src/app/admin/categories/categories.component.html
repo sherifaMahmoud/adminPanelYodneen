@@ -37,7 +37,7 @@
           <tbody>
             <tr *ngFor="let category of categories">
               <td>
-                <span class="badge bg-maroon me-2">{{ category.id }}</span>
+<span class="badge bg-maroon me-2">{{ category.categoryId }}</span>
                 {{ category.name }}
               </td>
               <td>
@@ -48,7 +48,7 @@
                   <button class="btn btn-sm btn-maroon" (click)="editCategory(category)">
                     <i class="fas fa-edit"></i> تعديل
                   </button>
-                  <button class="btn btn-sm btn-outline-maroon" (click)="confirmDelete(category.id)">
+                  <button class="btn btn-sm btn-outline-maroon" (click)="confirmDelete(category.categoryId)">
                     <i class="fas fa-trash"></i> حذف
                   </button>
                 </div>

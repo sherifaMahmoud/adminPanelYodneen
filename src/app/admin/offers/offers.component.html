@@ -10,24 +10,27 @@
     <form (ngSubmit)="addOffer()">
       <div class="mb-3">
         <label for="discount" class="form-label">نسبة الخصم</label>
-        <input type="number" class="form-control" id="discount" [(ngModel)]="newOffer.discount" name="discount" required>
+        <input type="number" class="form-control" id="discount" [(ngModel)]="newOffer.discount" name="discount"
+          required>
       </div>
       <div class="mb-3">
         <label for="startDate" class="form-label">تاريخ بداية العرض</label>
-        <input type="date" class="form-control" id="startDate" [(ngModel)]="newOffer.startDate" name="startDate" required>
+        <input type="date" class="form-control" id="startDate" [(ngModel)]="newOffer.startDate" name="startDate"
+          required>
       </div>
       <div class="mb-3">
         <label for="endDate" class="form-label">تاريخ نهاية العرض</label>
         <input type="date" class="form-control" id="endDate" [(ngModel)]="newOffer.endDate" name="endDate" required>
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="isGeneralOffer" [(ngModel)]="newOffer.isGeneralOffer" name="isGeneralOffer">
+        <input class="form-check-input" type="checkbox" id="isGeneralOffer" [(ngModel)]="newOffer.isGeneralOffer"
+          name="isGeneralOffer">
         <label class="form-check-label" for="isGeneralOffer">عرض عام؟</label>
       </div>
       <div class="mb-3">
         <label for="productId" class="form-label">اختيار المنتج</label>
         <select class="form-control" id="productId" [(ngModel)]="newOffer.productId" name="productId" required>
-          <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+          <option *ngFor="let product of products" [ngValue]="product.productId">{{ product.name }}</option>
         </select>
       </div>
       <button type="submit" class="btn btn-maroon">إضافة العرض</button>

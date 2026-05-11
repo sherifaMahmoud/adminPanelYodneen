@@ -64,7 +64,7 @@ export class CategoriesComponent implements OnInit {
     const newName = prompt('تعديل اسم الصنف', category.name);
     if (newName && newName.trim()) {
       this.isLoading = true;
-      this.categoryService.updateCategory(category.id, newName).subscribe({
+      this.categoryService.updateCategory(category.categoryId, newName).subscribe({ // ✅
         next: () => {
           this.loadCategories();
           this.isLoading = false;

@@ -6,6 +6,7 @@ import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { CategoryService } from '../../services/category.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 declare var bootstrap: any;
 
@@ -194,58 +195,41 @@ ngOnInit(): void {
   }
 
   addProduct() {
-    if (!this.validateForm()) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('Name', this.newProduct.name);
-    formData.append('Description', this.newProduct.description || '');
-    formData.append('Price', this.newProduct.price.toString());
-    formData.append('CategoryId', this.newProduct.categoryId.toString());
-    const selectedCategory = this.categories.find(
-      (cat) => cat.id === this.newProduct.categoryId
-    );
-    formData.append(
-      'CategoryName',
-      selectedCategory ? selectedCategory.name : ''
-    );
-    formData.append('Color', this.newProduct.color || '');
-    formData.append('Fabric', this.newProduct.fabric || '');
-    formData.append('Size', this.newProduct.size || '');
-    formData.append('StockQuantity', this.newProduct.stockQuantity.toString());
-    formData.append('IsActive', this.newProduct.isActive.toString());
-    formData.append('ImageUrl', this.newProduct.imageUrl);
-    formData.append(
-      'Offers',
-      JSON.stringify(
-        this.newProduct.offers.map((offer) => ({
-          offerId: offer.offerId,
-          productId: offer.productId,
-          discount: offer.discount,
-          startDate: new Date(offer.startDate).toISOString(),
-          endDate: new Date(offer.endDate).toISOString(),
-          isGeneralOffer: offer.isGeneralOffer,
-        }))
-      )
-    );
+    if (!this.validateForm()) return;
 
     this.isLoading = true;
-
     const token = localStorage.getItem('token');
-    console.log('JWT Token being sent:', token);
     if (!token) {
-      this.errorMessage =
-        'لم يتم العثور على توكن تسجيل الدخول. برجاء تسجيل الدخول مرة أخرى.';
+      this.errorMessage = 'لم يتم العثور على توكن تسجيل الدخول.';
       this.isLoading = false;
       return;
     }
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    const selectedCategory = this.categories.find(
+      (cat) => cat.categoryId === this.newProduct.categoryId
+    );
 
-    this.productService.addProduct(formData, headers).subscribe({
+    const productData = {
+      name: this.newProduct.name,
+      description: this.newProduct.description || '',
+      price: this.newProduct.price,
+      categoryId: this.newProduct.categoryId,
+      categoryName: selectedCategory ? selectedCategory.name : '',
+      color: this.newProduct.color || '',
+      fabric: this.newProduct.fabric || '',
+      size: this.newProduct.size || '',
+      stockQuantity: this.newProduct.stockQuantity,
+      isActive: this.newProduct.isActive,
+      imageUrl: this.newProduct.imageUrl,
+      offers: this.newProduct.offers
+    };
+
+    this.http.post(`${environment.apiUrl}/api/Products`, productData, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      })
+    }).subscribe({
       next: () => {
         this.loadProducts();
         this.closeModal();
@@ -256,7 +240,7 @@ ngOnInit(): void {
         console.error('فشل إضافة المنتج:', err);
         this.errorMessage = err.error?.message || 'حدث خطأ أثناء إضافة المنتج';
         this.isLoading = false;
-      },
+      }
     });
   }
 
@@ -272,7 +256,7 @@ ngOnInit(): void {
   confirmDelete() {
     if (this.productToDelete) {
       this.isLoading = true;
-      const token = localStorage.getItem('jwtToken');
+      const token = localStorage.getItem('token');
       if (!token) {
         this.errorMessage =
           'لم يتم العثور على توكن تسجيل الدخول. برجاء تسجيل الدخول مرة أخرى.';
@@ -285,7 +269,7 @@ ngOnInit(): void {
       });
 
       this.productService
-        .deleteProduct(this.productToDelete, headers)
+        .deleteProduct(this.productToDelete)
         .subscribe({
           next: () => {
             this.loadProducts();
