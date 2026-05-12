@@ -254,36 +254,62 @@ ngOnInit(): void {
   }
 
   confirmDelete() {
-    if (this.productToDelete) {
-      this.isLoading = true;
-      const token = localStorage.getItem('token');
-      if (!token) {
-        this.errorMessage =
-          'لم يتم العثور على توكن تسجيل الدخول. برجاء تسجيل الدخول مرة أخرى.';
-        this.isLoading = false;
-        return;
+
+    if (!this.productToDelete) return;
+
+    this.isLoading = true;
+
+    this.http.delete(
+      `${environment.apiUrl}/api/Products/${this.productToDelete}`,
+      {
+        responseType: 'text'
       }
+    ).subscribe({
 
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
+      next: () => {
 
-      this.productService
-        .deleteProduct(this.productToDelete)
-        .subscribe({
-          next: () => {
-            this.loadProducts();
-            this.closeDeleteModal();
-            this.isLoading = false;
-          },
-          error: (err) => {
-            console.error('Failed to delete product:', err);
-            this.errorMessage = 'حدث خطأ أثناء حذف المنتج';
-            this.closeDeleteModal();
-            this.isLoading = false;
-          },
-        });
-    }
+        this.isLoading = false;
+
+        this.errorMessage = '';
+
+        this.products = this.products.filter(
+          p => p.productId !== this.productToDelete
+        );
+
+        this.filteredProducts = this.filteredProducts.filter(
+          p => p.productId !== this.productToDelete
+        );
+
+        this.closeDeleteModal();
+      },
+
+      error: (err) => {
+
+        this.isLoading = false;
+
+        console.log(err);
+
+        // الرسالة اللي جاية من الـ backend
+        const message = err?.error || '';
+
+        if (
+          message.includes('related orders') ||
+          message.includes('related carts') ||
+          message.includes('related offers')
+        ) {
+
+          this.errorMessage =
+            'لا يمكن حذف المنتج لأنه مرتبط بطلبات أو عروض حالية';
+
+        } else {
+
+          this.errorMessage =
+            'حدث خطأ أثناء حذف المنتج';
+        }
+
+        this.closeDeleteModal();
+      }
+    });
   }
 
   closeDeleteModal() {

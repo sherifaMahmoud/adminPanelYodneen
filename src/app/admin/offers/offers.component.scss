@@ -1,39 +1,522 @@
-.btn-outline-maroon {
-  border: 2px solid #891414;
-  color: #891414;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+.offers-page {
+
+  padding: 28px;
 }
 
-.btn-outline-maroon:hover {
-  background-color: #891414;
+// ===== Header =====
+.offers-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 28px;
+}
+
+.offers-header h2 {
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+  margin-bottom: 6px;
+
+  color: #34111f;
+}
+
+.offers-header p {
+
+  color: #9a8d92;
+
+  margin: 0;
+}
+
+// ===== Add Button =====
+.add-offer-main-btn {
+
+  height: 54px;
+
+  padding-inline: 24px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
+
   color: white;
+
+  font-weight: 800;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  transition: .25s ease;
+}
+
+.add-offer-main-btn:hover {
+
   transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(75,28,45,.18);
 }
-.btn-maroon {
-  background-color: #4b1c2d;
+
+// ===== Empty State =====
+.empty-state {
+
+  background: white;
+
+  border-radius: 30px;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  border: 1px solid #f1ebed;
+}
+
+.empty-icon {
+
+  width: 90px;
+
+  height: 90px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9f3f5,
+      #fff
+    );
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: auto auto 24px;
+}
+
+.empty-icon i {
+
+  font-size: 34px;
+
+  color: #6a2b40;
+}
+
+.empty-state h3 {
+
+  font-size: 28px;
+
+  font-weight: 800;
+
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+
+  color: #8f8187;
+}
+
+// ===== Grid =====
+.offers-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(320px,1fr));
+
+  gap: 24px;
+}
+
+// ===== Card =====
+.offer-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 24px;
+
+  border: 1px solid #f0e9ec;
+
+  transition: .3s ease;
+}
+
+.offer-card:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.06);
+}
+
+// ===== Top =====
+.offer-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.discount-circle {
+
+  width: 74px;
+
+  height: 74px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
+
   color: white;
-  transition: all 0.3s ease;
-  border: 2px solid #4b1c2d;
-  margin-left: 20px;
-  border-radius: 4px;
-  font-weight: 600;
 
+  font-weight: 900;
 
+  font-size: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
-.btn-maroon:hover{
-  background-color: white;
+
+.delete-offer-btn {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 14px;
+
+  border: none;
+
+  background: #fff3f3;
+
+  color: #cf3f3f;
+
+  transition: .25s ease;
+}
+
+.delete-offer-btn:hover {
+
+  background: #cf3f3f;
+
+  color: white;
+}
+
+// ===== Body =====
+.offer-body h3 {
+
+  font-size: 24px;
+
+  font-weight: 800;
+
+  margin-bottom: 22px;
+}
+
+.offer-info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.info-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.info-row span {
+
+  color: #8f8187;
+}
+
+// ===== Footer =====
+.offer-footer {
+
+  margin-top: 24px;
+}
+
+.offer-badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 38px;
+
+  padding-inline: 16px;
+
+  border-radius: 999px;
+
+  background: #f5f3f4;
+
+  color: #5b3a46;
+
+  font-weight: 700;
+}
+
+.offer-badge.general {
+
+  background: #f3ebee;
+
   color: #4b1c2d;
-  transform: translateY(-2px);
 }
+
+// ===== Modal =====
+.modern-modal {
+
+  background: white;
+
+  border-radius: 34px;
+
+  overflow: hidden;
+}
+
+.modern-modal-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  padding: 28px 32px;
+
+  border-bottom: 1px solid #f1ebed;
+}
+
+.modern-modal-header h3 {
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  margin-bottom: 6px;
+}
+
+.modern-modal-header p {
+
+  color: #978b90;
+
+  margin: 0;
+}
+
+.close-modern-btn {
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #f7f3f4;
+
+  color: #6a2b40;
+
+  transition: .25s ease;
+}
+
+.close-modern-btn:hover {
+
+  background: #4b1c2d;
+
+  color: white;
+
+  transform: rotate(90deg);
+}
+
+.modern-modal-body {
+
+  padding: 28px 32px;
+}
+
+// ===== Inputs =====
+.form-group-modern {
+
+  margin-bottom: 22px;
+}
+
+.form-group-modern label {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-weight: 700;
+
+  color: #44202d;
+}
+
+.modern-input {
+
+  height: 54px;
+
+  border-radius: 16px;
+
+  border: 1px solid #ece4e7;
+
+  background: #fcfcfc;
+}
+
+.modern-input:focus {
+
+  border-color: #4b1c2d33;
+
+  box-shadow:
+    0 0 0 4px rgba(75,28,45,.05);
+}
+
+// ===== Double Grid =====
+.double-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+// ===== Switch =====
+.switch-wrapper {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 10px;
+}
+
 .form-check-input:checked {
+
   background-color: #4b1c2d !important;
+
   border-color: #4b1c2d !important;
 }
 
-.form-check-input:focus {
-  border-color: #4b1c2d !important;
-  box-shadow: 0 0 0 0.25rem rgba(75, 28, 45, 0.5) !important;
+// ===== Footer =====
+.modern-modal-footer {
 
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  margin-top: 32px;
+}
+
+.cancel-modern-btn {
+
+  height: 52px;
+
+  min-width: 120px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e7dde0;
+
+  background: white;
+
+  font-weight: 700;
+}
+
+.save-modern-btn {
+
+  height: 52px;
+
+  min-width: 170px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
+
+  color: white;
+
+  font-weight: 800;
+}
+.modern-modal {
+
+  direction: rtl;
+
+  text-align: right;
+}
+
+// ===== Modal Header =====
+.modern-modal-header {
+
+  direction: rtl;
+
+  text-align: right;
+}
+
+// ===== Inputs =====
+.modern-input {
+
+  text-align: right;
+}
+
+// ===== Double Grid =====
+.double-grid {
+
+  direction: rtl;
+}
+
+// ===== Footer =====
+.modern-modal-footer {
+
+  direction: rtl;
+
+  justify-content: flex-start;
+}
+
+// ===== Switch =====
+.switch-wrapper {
+
+  flex-direction: row-reverse;
+
+  justify-content: flex-end;
 }

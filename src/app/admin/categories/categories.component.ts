@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
+import { ProductService } from '../../services/product.service';
 declare var bootstrap: any;
 
 @Component({
@@ -17,12 +18,17 @@ export class CategoriesComponent implements OnInit {
   categoryToDelete: number | null = null;
   isLoading = false;
   errorMessage = '';
-
-  constructor(private categoryService: CategoryService) {}
+  products: any[] = [];
+  editedCategory = {
+    categoryId: 0,
+    name: ''
+  };
+  constructor(private categoryService: CategoryService,
+    private productService: ProductService) {}
 
   ngOnInit(): void {
     this.loadCategories();
-  }
+    this.loadProducts();  }
 
   loadCategories(): void {
     this.isLoading = true;
@@ -38,7 +44,27 @@ export class CategoriesComponent implements OnInit {
       },
     });
   }
+  loadProducts(): void {
 
+    this.productService.getProducts().subscribe({
+
+      next: (data) => {
+
+        this.products = data;
+      },
+
+      error: (err) => {
+
+        console.error(err);
+      }
+    });
+  }
+  getProductCount(categoryId: number): number {
+
+    return this.products.filter(
+      p => p.categoryId === categoryId
+    ).length;
+  }
   addCategory(): void {
     if (!this.newCategory.name.trim()) {
       alert('يجب إدخال اسم الصنف');
@@ -61,20 +87,75 @@ export class CategoriesComponent implements OnInit {
   }
 
   editCategory(category: any): void {
-    const newName = prompt('تعديل اسم الصنف', category.name);
-    if (newName && newName.trim()) {
-      this.isLoading = true;
-      this.categoryService.updateCategory(category.categoryId, newName).subscribe({ // ✅
-        next: () => {
-          this.loadCategories();
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error('فشل في تعديل الصنف:', err);
-          this.errorMessage = 'حدث خطأ أثناء تعديل الصنف';
-          this.isLoading = false;
-        },
-      });
+
+    this.editedCategory = {
+
+      categoryId: category.categoryId,
+
+      name: category.name
+    };
+
+    const modalEl = document.getElementById(
+      'editCategoryModal'
+    );
+
+    if (modalEl) {
+
+      new bootstrap.Modal(modalEl).show();
+    }
+  }
+  updateCategory(): void {
+
+    if (!this.editedCategory.name.trim()) {
+
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.categoryService.updateCategory(
+
+      this.editedCategory.categoryId,
+
+      this.editedCategory.name
+
+    ).subscribe({
+
+      next: () => {
+
+        this.loadCategories();
+
+        this.closeEditModal();
+
+        this.isLoading = false;
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        this.errorMessage =
+          'حدث خطأ أثناء تعديل الصنف';
+
+        this.isLoading = false;
+      }
+    });
+  }
+  closeEditModal(): void {
+
+    const modalEl =
+      document.getElementById(
+        'editCategoryModal'
+      );
+
+    if (modalEl) {
+
+      const modal =
+        bootstrap.Modal.getInstance(
+          modalEl
+        );
+
+      modal?.hide();
     }
   }
 

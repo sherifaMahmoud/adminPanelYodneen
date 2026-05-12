@@ -10,4 +10,11 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
   templateUrl: './Sidebar.component.html',
   styleUrls: ['./Sidebar.component.scss']
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  logout(): void {
+
+    localStorage.clear();
+
+    window.location.href = '/login';
+  }
+}

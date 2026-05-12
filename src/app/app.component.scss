@@ -1,0 +1,29 @@
+.app-container {
+
+  display: flex;
+
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      135deg,
+      #faf7f8,
+      #f5f6fa
+    );
+
+direction: rtl;
+}
+
+// ===== Main =====
+.main-content {
+
+  flex: 1;
+
+  overflow-x: hidden;
+}
+
+// ===== Login Full Width =====
+.full-width {
+
+  width: 100%;
+}

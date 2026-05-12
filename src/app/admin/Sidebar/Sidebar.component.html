@@ -1,25 +1,59 @@
-<div class="container-fluid">
-  <div class="row flex-row-reverse">
-    <div class="col-md-3 col-lg-2 bg-light p-3" style="height: calc(100vh - 5cm); overflow-y: auto;">
-      <h5 class="text-end">لوحة التحكم</h5>
-      <ul class="nav flex-column text-end">
-        <li class="nav-item mb-2">
-          <a routerLink="/admin" routerLinkActive="fw-bold " class="nav-link">الصفحة الرئيسية 🏠</a>
-        </li>
-        <li class="nav-item mb-2">
-          <a routerLink="products" routerLinkActive="fw-bold " class="nav-link">المنتجات 📦 </a>
-        </li>
-        <li class="nav-item mb-2">
-          <a routerLink="offers" routerLinkActive="fw-bold " class="nav-link">العروض 💸</a>
-        </li>
-        <li class="nav-item mb-2">
-          <a routerLink="categories" routerLinkActive="fw-bold " class="nav-link">الأصناف 📁</a>
-        </li>
-      </ul>
+<div class="dashboard-layout" dir="rtl">
+
+  <!-- Sidebar -->
+  <aside class="modern-sidebar">
+
+    <!-- Logo -->
+    <div>
+
+      <div class="sidebar-brand">
+
+        <div class="brand-icon">
+          <i class="fas fa-layer-group"></i>
+        </div>
+
+<div class="brand-text">
+
+  <a class="logo-font yodneen-logo" href="#">
+    يُدنِين
+  </a>
+
+  <p>
+    لوحة التحكم
+  </p>
+
+</div>
+
+      </div>
+
+      <!-- Links -->
+      <nav class="sidebar-links">
+
+        <a routerLink="/products" routerLinkActive="active-link" class="sidebar-link">
+          <i class="fas fa-box"></i>
+          <span>المنتجات</span>
+        </a>
+
+        <a routerLink="/offers" routerLinkActive="active-link" class="sidebar-link">
+          <i class="fas fa-tags"></i>
+          <span>العروض</span>
+        </a>
+
+        <a routerLink="/categories" routerLinkActive="active-link" class="sidebar-link">
+          <i class="fas fa-layer-group"></i>
+          <span>الأصناف</span>
+        </a>
+
+      </nav>
+
     </div>
 
-    <div class="col-md-9 col-lg-10 p-3">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+    <!-- Logout -->
+    <button class="logout-btn" (click)="logout()">
+      <i class="fas fa-right-from-bracket"></i>
+      <span>تسجيل الخروج</span>
+    </button>
+
+  </aside>
+
 </div>

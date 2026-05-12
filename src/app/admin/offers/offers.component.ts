@@ -97,4 +97,12 @@ export class OffersComponent implements OnInit {
       isGeneralOffer: true,
     };
   }
+  getProductName(productId: number): string {
+
+    const product = this.products.find(
+      p => p.productId === productId
+    );
+
+    return product ? product.name : 'منتج';
+  }
 }

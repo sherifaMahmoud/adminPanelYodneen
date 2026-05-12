@@ -1,65 +1,672 @@
-.card {
-  margin-bottom: 20px;
+.categories-page {
+
+  padding: 28px;
+}
+
+// ===== Header =====
+.categories-header {
+
+  margin-bottom: 28px;
+}
+
+.categories-header h2 {
+
+  font-size: 38px;
+
+  font-weight: 900;
+
+  color: #34111f;
+
+  margin-bottom: 8px;
+}
+
+.categories-header p {
+
+  color: #978b90;
+
+  margin: 0;
+}
+
+// ===== Add Card =====
+.add-category-card {
+
+  background: white;
+
+  border-radius: 30px;
+
+  padding: 24px;
+
+  border: 1px solid #f0e9ec;
+
+  margin-bottom: 24px;
+}
+
+// ===== Grid =====
+.add-category-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 220px;
+
+  gap: 18px;
+}
+
+// ===== Input =====
+.input-wrapper {
+
+  position: relative;
+}
+
+.input-wrapper i {
+
+  position: absolute;
+
+  right: 20px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #9a8d92;
+}
+
+.input-wrapper input {
+
+  width: 100%;
+
+  height: 58px;
+
+  border-radius: 18px;
+
+  border: 1px solid #ece4e7;
+
+  background: #fcfcfc;
+
+  padding-inline: 52px 18px;
+
+  outline: none;
+
+  transition: .25s ease;
+}
+
+.input-wrapper input:focus {
+
+  border-color: #4b1c2d33;
+
+  box-shadow:
+    0 0 0 4px rgba(75,28,45,.05);
+}
+
+// ===== Add Button =====
+.add-category-btn {
+
+  height: 58px;
+
   border: none;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 
-  .card-header {
-    padding: 12px 20px;
-    border-bottom: none;
-  }
-}
+  border-radius: 18px;
 
-.list-group-item {
-  border-radius: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #eee;
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
 
-  h5 {
-    color: #4b1c2d;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-}
-
-.table {
-  th {
-    background-color: #f8f9fa;
-  }
-
-  .btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
-  }
-}
-.btn-maroon {
-  background-color: #4b1c2d;
   color: white;
-  transition: all 0.3s ease;
-  border: 2px solid #4b1c2d;
-  margin-left: 20px;
-  border-radius: 4px;
-  font-weight: 600;
 
+  font-weight: 800;
 
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  transition: .3s ease;
 }
-.btn-maroon:hover{
-  background-color: white;
-  color: #4b1c2d;
+
+.add-category-btn:hover {
+
   transform: translateY(-2px);
-}
-.btn-outline-maroon {
-  border: 2px solid #4b1c2d;
-  color: #4b1c2d;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+
+  box-shadow:
+    0 14px 30px rgba(75,28,45,.16);
 }
 
-.btn-outline-maroon:hover {
-  background-color: #4b1c2d;
+.add-category-btn:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
+}
+
+// ===== Error =====
+.custom-error {
+
+  background: #fff1f1;
+
+  border: 1px solid #ffdede;
+
+  color: #c63b3b;
+
+  padding: 16px 18px;
+
+  border-radius: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+// ===== Empty =====
+.empty-state {
+
+  background: white;
+
+  border-radius: 30px;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  border: 1px solid #f0e9ec;
+}
+
+.empty-icon {
+
+  width: 90px;
+
+  height: 90px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9f3f5,
+      #fff
+    );
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: auto auto 24px;
+}
+
+.empty-icon i {
+
+  font-size: 34px;
+
+  color: #6a2b40;
+}
+
+.empty-state h3 {
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+
+  color: #978b90;
+}
+
+// ===== List =====
+.categories-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+// ===== Card =====
+.category-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 24px;
+
+  border: 1px solid #f0e9ec;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  transition: .3s ease;
+}
+
+.category-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.05);
+}
+
+// ===== Main =====
+.category-main {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+// ===== ID =====
+.category-id {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
+
   color: white;
-  transform: translateY(-2px);
+
+  font-weight: 900;
+
+  font-size: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
-.bg-maroon{
-  background-color: #4b1c2d;
+
+// ===== Info =====
+.category-info h3 {
+
+  font-size: 26px;
+
+  font-weight: 800;
+
+  margin-bottom: 6px;
+}
+
+.category-info p {
+
+  margin: 0;
+
+  color: #8f8187;
+}
+
+// ===== Actions =====
+.category-actions {
+
+  display: flex;
+
+  gap: 12px;
+}
+
+// ===== Edit =====
+.edit-btn {
+
+  height: 48px;
+
+  padding-inline: 18px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #f7f3f4;
+
+  color: #4b1c2d;
+
+  font-weight: 700;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  transition: .25s ease;
+}
+
+.edit-btn:hover {
+
+  background: #4b1c2d;
+
+  color: white;
+}
+
+// ===== Delete =====
+.delete-btn {
+
+  height: 48px;
+
+  padding-inline: 18px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #fff1f1;
+
+  color: #cf3f3f;
+
+  font-weight: 700;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  transition: .25s ease;
+}
+
+.delete-btn:hover {
+
+  background: #cf3f3f;
+
+  color: white;
+}
+
+// ===== Delete Modal =====
+.delete-dialog {
+
+  max-width: 460px;
+}
+
+.delete-modal {
+
+  border: none;
+
+  border-radius: 34px;
+
+  padding: 38px 34px;
+
+  text-align: center;
+}
+
+.delete-top-icon {
+
+  width: 82px;
+
+  height: 82px;
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff1f1,
+      #ffe7e7
+    );
+
+  color: #cf3f3f;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0 auto 24px;
+}
+
+.delete-top-icon i {
+
+  font-size: 30px;
+}
+
+.delete-modal h3 {
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  margin-bottom: 10px;
+}
+
+.delete-modal p {
+
+  color: #978b90;
+
+  margin-bottom: 32px;
+}
+
+// ===== Delete Actions =====
+.delete-actions {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.cancel-delete-btn {
+
+  height: 52px;
+
+  min-width: 130px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e7dde0;
+
+  background: white;
+
+  font-weight: 700;
+}
+
+.confirm-delete-btn {
+
+  height: 52px;
+
+  min-width: 170px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #cf3f3f,
+      #ab2d2d
+    );
+
+  color: white;
+
+  font-weight: 800;
+}
+// ===== Edit Modal =====
+.edit-modal {
+
+  border: none;
+
+  border-radius: 34px;
+
+  overflow: hidden;
+
+  padding: 0;
+}
+
+// ===== Header =====
+.edit-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  padding: 28px 32px;
+
+  border-bottom: 1px solid #f1ebed;
+}
+
+.edit-header h3 {
+
+  font-size: 32px;
+
+  font-weight: 900;
+
+  margin-bottom: 8px;
+
+  color: #34111f;
+}
+
+.edit-header p {
+
+  color: #978b90;
+
+  margin: 0;
+}
+
+// ===== Close =====
+.close-edit-btn {
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #f7f3f4;
+
+  color: #6a2b40;
+
+  transition: .25s ease;
+}
+
+.close-edit-btn:hover {
+
+  background: #4b1c2d;
+
+  color: white;
+
+  transform: rotate(90deg);
+}
+
+// ===== Body =====
+.edit-body {
+
+  padding: 28px 32px;
+}
+
+.edit-body label {
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-weight: 700;
+
+  color: #44202d;
+}
+
+// ===== Input =====
+.edit-input {
+
+  width: 100%;
+
+  height: 58px;
+
+  border-radius: 18px;
+
+  border: 1px solid #ece4e7;
+
+  background: #fcfcfc;
+
+  padding-inline: 18px;
+
+  outline: none;
+
+  transition: .25s ease;
+}
+
+.edit-input:focus {
+
+  border-color: #4b1c2d33;
+
+  box-shadow:
+    0 0 0 4px rgba(75,28,45,.05);
+}
+
+// ===== Footer =====
+.edit-footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  padding: 24px 32px;
+
+  border-top: 1px solid #f1ebed;
+}
+
+// ===== Cancel =====
+.cancel-edit-btn {
+
+  height: 52px;
+
+  min-width: 120px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e7dde0;
+
+  background: white;
+
+  font-weight: 700;
+}
+
+// ===== Save =====
+.save-edit-btn {
+
+  height: 52px;
+
+  min-width: 180px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b1c2d,
+      #6a2b40
+    );
+
+  color: white;
+
+  font-weight: 800;
 }

@@ -1,90 +1,281 @@
-<div class="container mt-5" dir="rtl">
-  <div class="shadow-sm">
+<div class="categories-page" dir="rtl">
+
+  <!-- ================= Header ================= -->
+  <div class="categories-header">
+
     <div>
-      <h3 class="mb-0">إدارة الأصناف</h3>
+
+      <h2>
+
+        إدارة الأصناف
+
+      </h2>
+
+      <p>
+
+        إدارة جميع أصناف ومنتجات المتجر
+
+      </p>
+
     </div>
-    <div class="card-body">
-      <div class="row mb-4">
-        <div class="col-md-8">
-          <input
-            type="text"
-            [(ngModel)]="newCategory.name"
-            class="form-control form-control-lg"
-            placeholder="أدخل اسم الصنف الجديد"
-            (keyup.enter)="addCategory()"
-          >
-        </div>
-        <div class="col-md-4">
-          <button
-            class="btn btn-maroon w-100 h-100"
-            (click)="addCategory()"
-            [disabled]="!newCategory.name.trim()"
-          >
-            <i class="fas fa-plus me-2"></i>إضافة صنف
-          </button>
-        </div>
+
+  </div>
+
+  <!-- ================= Add Category ================= -->
+  <div class="add-category-card">
+
+    <div class="add-category-grid">
+
+      <!-- Input -->
+      <div class="input-wrapper">
+
+        <i class="fas fa-layer-group"></i>
+
+        <input type="text" [(ngModel)]="newCategory.name" placeholder="أدخل اسم الصنف الجديد"
+          (keyup.enter)="addCategory()" />
+
       </div>
 
-      <div class="table-responsive">
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th width="50%">اسم الصنف</th>
-              <th width="30%">عدد المنتجات</th>
-              <th width="20%">الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let category of categories">
-              <td>
-<span class="badge bg-maroon me-2">{{ category.categoryId }}</span>
-                {{ category.name }}
-              </td>
-              <td>
-                <span class="badge bg-info">{{ category.productCount }}</span>
-              </td>
-              <td>
-                <div class="d-flex gap-2">
-                  <button class="btn btn-sm btn-maroon" (click)="editCategory(category)">
-                    <i class="fas fa-edit"></i> تعديل
-                  </button>
-                  <button class="btn btn-sm btn-outline-maroon" (click)="confirmDelete(category.categoryId)">
-                    <i class="fas fa-trash"></i> حذف
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr *ngIf="categories.length === 0">
-              <td colspan="3" class="text-center text-muted py-4">
-                لا توجد أصناف مسجلة
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Button -->
+      <button class="add-category-btn" (click)="addCategory()" [disabled]="!newCategory.name.trim()">
+
+        <i class="fas fa-plus"></i>
+
+        إضافة صنف
+
+      </button>
+
     </div>
+
   </div>
+
+  <!-- ================= Error ================= -->
+  <div *ngIf="errorMessage" class="custom-error">
+
+    <i class="fas fa-circle-exclamation"></i>
+
+    {{ errorMessage }}
+
+  </div>
+
+  <!-- ================= Empty State ================= -->
+  <div *ngIf="categories.length === 0 && !isLoading" class="empty-state">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-folder-open"></i>
+
+    </div>
+
+    <h3>
+
+      لا توجد أصناف
+
+    </h3>
+
+    <p>
+
+      قم بإضافة أول صنف للمتجر
+
+    </p>
+
+  </div>
+
+  <!-- ================= Categories ================= -->
+  <div *ngIf="categories.length > 0" class="categories-list">
+
+    <div class="category-card" *ngFor="let category of categories">
+
+      <!-- Left -->
+      <div class="category-main">
+
+        <div class="category-id">
+
+          {{ category.categoryId }}
+
+        </div>
+
+        <div class="category-info">
+
+          <h3>
+
+            {{ category.name }}
+
+          </h3>
+
+          <p>
+            {{ getProductCount(category.categoryId) }}
+            منتج داخل هذا الصنف
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Right -->
+      <div class="category-actions">
+
+        <button class="edit-btn" (click)="editCategory(category)">
+
+          <i class="fas fa-pen"></i>
+
+          تعديل
+
+        </button>
+
+        <button class="delete-btn" (click)="confirmDelete(category.categoryId)">
+
+          <i class="fas fa-trash"></i>
+
+          حذف
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
-<!-- نافذة تأكيد الحذف -->
+<!-- ============================================== -->
+<!-- =============== Delete Modal ================= -->
+<!-- ============================================== -->
+
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">تأكيد الحذف</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+
+  <div class="modal-dialog modal-dialog-centered delete-dialog">
+
+    <div class="modal-content delete-modal">
+
+      <!-- Icon -->
+      <div class="delete-top-icon">
+
+        <i class="fas fa-trash"></i>
+
       </div>
-      <div class="modal-body text-center py-4">
-        <i class="fas fa-exclamation-triangle text-danger fa-4x mb-3"></i>
-        <h5>هل أنت متأكد من حذف هذا الصنف؟</h5>
-        <p class="text-muted">لا يمكن التراجع عن هذا الإجراء</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-        <button type="button" class="btn btn-danger" (click)="deleteCategory()">
-          <i class="fas fa-trash me-1"></i> نعم، احذف
+
+      <!-- Text -->
+      <h3>
+
+        حذف الصنف
+
+      </h3>
+
+      <p>
+
+        هل أنت متأكد من حذف هذا الصنف؟
+
+      </p>
+
+      <!-- Actions -->
+      <div class="delete-actions">
+
+        <button type="button" class="cancel-delete-btn" data-bs-dismiss="modal">
+
+          إلغاء
+
         </button>
+
+        <button type="button" class="confirm-delete-btn" (click)="deleteCategory()">
+
+          <span *ngIf="!isLoading">
+
+            حذف الصنف
+
+          </span>
+
+          <span *ngIf="isLoading">
+
+            جاري الحذف...
+
+          </span>
+
+        </button>
+
       </div>
+
     </div>
+
   </div>
+
+</div>
+<div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content edit-modal">
+
+      <!-- Header -->
+      <div class="edit-header">
+
+        <div>
+
+          <h3>
+
+            تعديل الصنف
+
+          </h3>
+
+          <p>
+
+            قم بتعديل اسم الصنف
+
+          </p>
+
+        </div>
+
+        <button type="button" class="close-edit-btn" data-bs-dismiss="modal">
+
+          <i class="fas fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+      <!-- Body -->
+      <div class="edit-body">
+
+        <label>
+
+          اسم الصنف
+
+        </label>
+
+        <input type="text" [(ngModel)]="editedCategory.name" class="edit-input" />
+
+      </div>
+
+      <!-- Footer -->
+      <div class="edit-footer">
+
+        <button class="cancel-edit-btn" data-bs-dismiss="modal">
+
+          إلغاء
+
+        </button>
+
+        <button class="save-edit-btn" (click)="updateCategory()">
+
+          <span *ngIf="!isLoading">
+
+            حفظ التعديلات
+
+          </span>
+
+          <span *ngIf="isLoading">
+
+            جاري الحفظ...
+
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

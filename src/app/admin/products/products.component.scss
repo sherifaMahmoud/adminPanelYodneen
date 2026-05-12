@@ -1,88 +1,743 @@
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
+// ===== Base =====
+body {
+
+  background: #f5f5f7;
+
+  font-family: 'Cairo', sans-serif;
+
+  color: #2c1b22;
 }
 
-.card-img-top {
-  background-color: #f8f9fa;
+// ===== Wrapper =====
+.products-wrapper {
+
+
+  margin: auto;
+
+  padding: 24px;
+}
+
+// ===== Top =====
+.top-actions {
+
+  display: flex;
+
+  gap: 16px;
+
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+// ===== Search =====
+.search-wrapper {
+
+  flex: 1;
+
+  position: relative;
+}
+
+.search-wrapper i {
+
+  position: absolute;
+
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #999;
+}
+
+.search-wrapper input {
+
+  width: 100%;
+
+  height: 52px;
+
+  border-radius: 16px;
+
+  border: 1px solid #ebe6e8;
+
+  background: white;
+
+  padding-inline: 48px 18px;
+
+  outline: none;
+
+  transition: .25s;
+}
+
+.search-wrapper input:focus {
+
+  border-color: #4b1c2d33;
+
+  box-shadow:
+    0 0 0 4px rgba(75,28,45,.05);
+}
+
+// ===== Add Button =====
+.add-btn {
+
+  height: 52px;
+
+  padding-inline: 24px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #4b1c2d;
+
+  color: white;
+
+  font-weight: 700;
+
+  transition: .25s;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.add-btn:hover {
+
+  transform: translateY(-2px);
+
+  background: #3b1522;
+}
+
+// ===== Error =====
+.custom-error {
+
+  background: #fff1f1;
+
+  border: 1px solid #ffdede;
+
+  color: #c63b3b;
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  margin-bottom: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+// ===== Product List =====
+.products-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+// ===== Product Row =====
+.product-row {
+
+  background: white;
+
+  border: 1px solid #eee7ea;
+
+  border-radius: 24px;
+
   overflow: hidden;
+
+  transition: .3s;
+
+  box-shadow:
+    0 4px 14px rgba(0,0,0,.03);
 }
 
-.badge {
-  font-size: 0.8rem;
-  font-weight: normal;
+.product-row:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06);
 }
 
-.input-group-text {
-  background-color: #f8f9fa;
+// ===== Product Main =====
+.product-main {
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 18px;
 }
 
+// ===== Image =====
+.product-image-box {
+
+  width: 110px;
+
+  height: 110px;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background: #f8f8f8;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.product-image-box img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+// ===== Details =====
+.product-details {
+
+  flex: 1;
+
+  padding-inline: 18px;
+}
+
+// ===== Header =====
+.product-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.product-header h3 {
+
+  font-size: 22px;
+
+  margin-bottom: 6px;
+
+  font-weight: 800;
+}
+
+.product-header p {
+
+  color: #8a7f84;
+
+  margin: 0;
+
+  line-height: 1.7;
+}
+
+// ===== Price =====
+.product-price {
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  color: #4b1c2d;
+
+  white-space: nowrap;
+}
+
+// ===== Footer =====
+.product-footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 18px;
+}
+
+// ===== Stock =====
+.stock-badge {
+
+  background: #e8f7ed;
+
+  color: #1e8e4a;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+}
+
+// ===== Delete =====
+.delete-btn {
+
+  border: none;
+
+  background: transparent;
+
+  color: #cf3f3f;
+
+  font-weight: 700;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  transition: .25s;
+}
+
+.delete-btn:hover {
+
+  opacity: .7;
+}
+
+// ===== Modal =====
 .modal-content {
-  border-radius: 10px;
+
+  border: none;
+
+  border-radius: 32px;
+
   overflow: hidden;
 }
 
 .modal-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+
+  border-bottom: 1px solid #f0ecee;
+
+  padding: 24px;
 }
 
-.form-switch .form-check-input {
-  width: 3em;
-  height: 1.5em;
+.modal-body {
+
+  padding: 24px;
 }
 
-[style*="border-style: dashed "] {
-  transition: all 0.3s ease;
-  &:hover {
-    border-color: #4b1c2d !important;
-    background-color: rgba(157, 39, 39, 0.05);
-  }
+.modal-footer {
+
+  border-top: 1px solid #f0ecee;
+
+  padding: 20px 24px;
 }
+
+// ===== Inputs =====
+.form-control,
+.form-select {
+
+  height: 52px;
+
+  border-radius: 16px;
+
+  border: 1px solid #ece7e9;
+
+  background: #fcfcfc;
+}
+
+.form-control:focus,
+.form-select:focus {
+
+  border-color: #4b1c2d33;
+
+  box-shadow:
+    0 0 0 4px rgba(75,28,45,.05);
+}
+
+// ===== Switch =====
+.form-check-input {
+
+  width: 3rem;
+
+  height: 1.5rem;
+}
+
 .form-check-input:checked {
-  background-color: #4b1c2d !important;
-  border-color: #4b1c2d !important;
-}
 
-.form-check-input:focus {
-  border-color: #4b1c2d !important;
-  box-shadow: 0 0 0 0.25rem rgba(75, 28, 45, 0.5) !important; 
-
-}
-
-.btn-maroon {
   background-color: #4b1c2d;
+
+  border-color: #4b1c2d;
+}
+// ===== Modal Header =====
+.custom-modal-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  padding: 28px 32px;
+
+  border-bottom: 1px solid #f1ebed;
+}
+
+// ===== Header Content =====
+.header-content h4 {
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+  color: #34111f;
+
+  margin-bottom: 6px;
+}
+
+.header-content p {
+
+  color: #9a8d92;
+
+  font-size: 15px;
+
+  margin: 0;
+}
+
+// ===== Close Button =====
+.custom-close-btn {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 14px;
+
+  border: none;
+
+  background: #f7f3f4;
+
+  color: #6a2b40;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: .25s ease;
+
+  flex-shrink: 0;
+}
+
+.custom-close-btn i {
+
+  font-size: 18px;
+}
+
+.custom-close-btn:hover {
+
+  background: #4b1c2d;
+
   color: white;
-  transition: all 0.3s ease;
-  border: 2px solid #4b1c2d;
-  margin-left: 20px;
-  border-radius: 4px;
-  font-weight: 600;
 
-
-}
-.btn-maroon:hover{
-  background-color: white;
-  color: #4b1c2d;
-  transform: translateY(-2px);
-}
-.btn-outline-maroon {
-  border: 2px solid #4b1c2d;
-  color: #4b1c2d;
-  font-weight: 600;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  transform: rotate(90deg);
 }
 
-.btn-outline-maroon:hover {
-  background-color: #4b1c2d;
+// ===== Footer =====
+.custom-footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  padding: 24px 32px;
+
+  border-top: 1px solid #f2ecee;
+}
+
+// ===== Cancel Button =====
+.cancel-btn {
+
+  height: 52px;
+
+  min-width: 120px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e5dadd;
+
+  background: white;
+
+  color: #5f4a53;
+
+  font-weight: 700;
+
+  transition: .25s ease;
+}
+
+.cancel-btn:hover {
+
+  background: #f8f5f6;
+
+  border-color: #d8c6cd;
+}
+
+// ===== Save Button =====
+.save-btn {
+
+  height: 52px;
+
+  min-width: 180px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #4b1c2d,
+    #6a2b40
+  );
+
   color: white;
-  transform: translateY(-2px);
-}
-.colorr{
-  color: #4b1c2d !important;
 
+  font-weight: 800;
+
+  font-size: 15px;
+
+  transition: .3s ease;
+
+  box-shadow:
+    0 10px 24px rgba(75,28,45,.18);
+}
+
+.save-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(75,28,45,.25);
+}
+
+.save-btn:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
+}
+
+// ===== Modal Content =====
+.modal-content {
+
+  border: none;
+
+  border-radius: 36px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.12);
+}
+// ===== Offer Button =====
+.offer-btn {
+
+  height: 48px;
+
+  padding-inline: 22px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: rgba(75,28,45,.08);
+
+  color: #4b1c2d;
+
+  font-weight: 800;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  transition: .25s ease;
+}
+
+.offer-btn i {
+
+  font-size: 14px;
+}
+
+.offer-btn:hover {
+
+  background: #4b1c2d;
+
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(75,28,45,.14);
+}
+// ===== Delete Dialog =====
+.delete-dialog {
+
+  max-width: 460px;
+}
+
+// ===== Delete Modal =====
+.delete-modal {
+
+  border: none;
+
+  border-radius: 34px;
+
+  padding: 38px 34px;
+
+  text-align: center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.14);
+}
+
+// ===== Icon =====
+.delete-top-icon {
+
+  width: 78px;
+
+  height: 78px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff1f1,
+      #ffe7e7
+    );
+
+  color: #cf3f3f;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0 auto 24px;
+}
+
+.delete-top-icon i {
+
+  font-size: 28px;
+}
+
+// ===== Title =====
+.delete-modal h3 {
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  color: #2e101c;
+
+  margin-bottom: 10px;
+}
+
+// ===== Text =====
+.delete-modal p {
+
+  color: #8e7f85;
+
+  font-size: 15px;
+
+  margin-bottom: 32px;
+}
+
+// ===== Actions =====
+.delete-actions {
+
+  display: flex;
+
+  gap: 14px;
+
+  justify-content: center;
+}
+
+// ===== Cancel =====
+.delete-cancel-btn {
+
+  height: 52px;
+
+  min-width: 130px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e7dde0;
+
+  background: white;
+
+  color: #69545c;
+
+  font-weight: 700;
+
+  transition: .25s ease;
+}
+
+.delete-cancel-btn:hover {
+
+  background: #f8f5f6;
+}
+
+// ===== Confirm =====
+.delete-confirm-btn {
+
+  height: 52px;
+
+  min-width: 170px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c93d3d,
+      #a92c2c
+    );
+
+  color: white;
+
+  font-weight: 800;
+
+  transition: .3s ease;
+
+  box-shadow:
+    0 10px 24px rgba(201,61,61,.22);
+}
+
+.delete-confirm-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(201,61,61,.3);
+}
+
+.delete-confirm-btn:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
 }

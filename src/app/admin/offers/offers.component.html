@@ -1,43 +1,300 @@
-<button class="btn btn-maroon" (click)="openModal(content)">إضافة عرض جديد</button>
+<div class="offers-page" dir="rtl">
 
-<!-- المودال -->
+  <!-- ================= Header ================= -->
+  <div class="offers-header">
+
+    <div>
+
+      <h2>
+
+        العروض
+
+      </h2>
+
+      <p>
+
+        إدارة جميع العروض والخصومات الخاصة بالمتجر
+
+      </p>
+
+    </div>
+
+    <button class="add-offer-main-btn" (click)="openModal(content)">
+
+      <i class="fas fa-plus"></i>
+
+      إضافة عرض جديد
+
+    </button>
+
+  </div>
+
+  <!-- ================= Empty State ================= -->
+  <div *ngIf="offers.length === 0" class="empty-state">
+
+    <div class="empty-icon">
+
+      <i class="fas fa-tags"></i>
+
+    </div>
+
+    <h3>
+
+      لا توجد عروض
+
+    </h3>
+
+    <p>
+
+      قم بإضافة أول عرض لمنتجات المتجر
+
+    </p>
+
+  </div>
+
+  <!-- ================= Offers List ================= -->
+  <div *ngIf="offers.length > 0" class="offers-grid">
+
+    <div class="offer-card" *ngFor="let offer of offers">
+
+      <!-- Top -->
+      <div class="offer-top">
+
+        <div class="discount-circle">
+
+          {{ offer.discount }}%
+
+        </div>
+
+        <button class="delete-offer-btn" (click)="deleteOffer(offer.offerId)">
+
+          <i class="fas fa-trash"></i>
+
+        </button>
+
+      </div>
+
+      <!-- Body -->
+      <div class="offer-body">
+
+        <h3>
+          {{ getProductName(offer.productId) }}
+        </h3>
+
+        <div class="offer-info">
+
+          <div class="info-row">
+
+            <span>
+
+              بداية العرض
+
+            </span>
+
+            <strong>
+
+              {{
+              offer.startDate | date:'dd/MM/yyyy'
+              }}
+
+            </strong>
+
+          </div>
+
+          <div class="info-row">
+
+            <span>
+
+              نهاية العرض
+
+            </span>
+
+            <strong>
+
+              {{
+              offer.endDate | date:'dd/MM/yyyy'
+              }}
+
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="offer-footer">
+
+        <span class="offer-badge" [class.general]="offer.isGeneralOffer">
+
+          {{
+          offer.isGeneralOffer
+          ? 'عرض عام'
+          : 'عرض خاص'
+          }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================================== -->
+<!-- ================= Modal =================== -->
+<!-- =========================================== -->
+
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">إضافة عرض جديد</h4>
-    <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+
+  <div class="modern-modal" dir="rtl">
+
+    <!-- Header -->
+    <div class="modern-modal-header">
+
+      <div>
+
+        <h3>
+
+          إضافة عرض جديد
+
+        </h3>
+
+        <p>
+
+          قم بإضافة بيانات العرض بالكامل
+
+        </p>
+
+      </div>
+
+      <button type="button" class="close-modern-btn" (click)="modal.dismiss()">
+
+        <i class="fas fa-xmark"></i>
+
+      </button>
+
+    </div>
+
+    <!-- Body -->
+    <div class="modern-modal-body">
+
+      <form (ngSubmit)="addOffer()">
+
+        <!-- Discount -->
+        <div class="form-group-modern">
+
+          <label>
+
+            نسبة الخصم
+
+          </label>
+
+          <input type="number" class="form-control modern-input" [(ngModel)]="newOffer.discount" name="discount"
+            required />
+
+        </div>
+
+        <!-- Product -->
+        <div class="form-group-modern">
+
+          <label>
+
+            اختيار المنتج
+
+          </label>
+
+          <select class="form-select modern-input" [(ngModel)]="newOffer.productId" name="productId" required>
+
+            <option value="0">
+
+              اختر منتج
+
+            </option>
+
+            <option *ngFor="let product of products" [ngValue]="product.productId">
+
+              {{ product.name }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- Dates -->
+        <div class="double-grid">
+
+          <div class="form-group-modern">
+
+            <label>
+
+              تاريخ البداية
+
+            </label>
+
+            <input type="date" class="form-control modern-input" [(ngModel)]="newOffer.startDate" name="startDate"
+              required />
+
+          </div>
+
+          <div class="form-group-modern">
+
+            <label>
+
+              تاريخ النهاية
+
+            </label>
+
+            <input type="date" class="form-control modern-input" [(ngModel)]="newOffer.endDate" name="endDate"
+              required />
+
+          </div>
+
+        </div>
+
+        <!-- Switch -->
+        <div class="switch-wrapper">
+
+          <div class="form-check form-switch">
+
+            <input class="form-check-input" type="checkbox" [(ngModel)]="newOffer.isGeneralOffer"
+              name="isGeneralOffer" />
+
+          </div>
+
+          <span>
+
+            عرض عام
+
+          </span>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="modern-modal-footer">
+          <button type="submit" class="save-modern-btn">
+
+            إضافة العرض
+
+          </button>
+          <button type="button" class="cancel-modern-btn" (click)="modal.dismiss()">
+
+            إلغاء
+
+          </button>
+
+
+
+        </div>
+
+      </form>
+
+    </div>
+
   </div>
-  <div class="modal-body">
-    <form (ngSubmit)="addOffer()">
-      <div class="mb-3">
-        <label for="discount" class="form-label">نسبة الخصم</label>
-        <input type="number" class="form-control" id="discount" [(ngModel)]="newOffer.discount" name="discount"
-          required>
-      </div>
-      <div class="mb-3">
-        <label for="startDate" class="form-label">تاريخ بداية العرض</label>
-        <input type="date" class="form-control" id="startDate" [(ngModel)]="newOffer.startDate" name="startDate"
-          required>
-      </div>
-      <div class="mb-3">
-        <label for="endDate" class="form-label">تاريخ نهاية العرض</label>
-        <input type="date" class="form-control" id="endDate" [(ngModel)]="newOffer.endDate" name="endDate" required>
-      </div>
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="isGeneralOffer" [(ngModel)]="newOffer.isGeneralOffer"
-          name="isGeneralOffer">
-        <label class="form-check-label" for="isGeneralOffer">عرض عام؟</label>
-      </div>
-      <div class="mb-3">
-        <label for="productId" class="form-label">اختيار المنتج</label>
-        <select class="form-control" id="productId" [(ngModel)]="newOffer.productId" name="productId" required>
-          <option *ngFor="let product of products" [ngValue]="product.productId">{{ product.name }}</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-maroon">إضافة العرض</button>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">إغلاق</button>
-    <button type="button" class="btn btn-maroon" (click)="addOffer()">إضافة</button>
-  </div>
+
 </ng-template>

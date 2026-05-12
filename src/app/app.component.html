@@ -1,7 +1,14 @@
-<!-- app.component.html -->
 <div class="app-container">
-  <app-sidebar></app-sidebar>  <!-- Sidebar Component -->
-  <div class="main-content">
-    <router-outlet></router-outlet>  <!-- المكان الذي سيتم فيه عرض المحتوى -->
+
+  <!-- Sidebar -->
+  <app-sidebar *ngIf="showSidebar">
+  </app-sidebar>
+
+  <!-- Main -->
+  <div class="main-content" [class.full-width]="!showSidebar">
+
+    <router-outlet></router-outlet>
+
   </div>
+
 </div>

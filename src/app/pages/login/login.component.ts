@@ -1,8 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -12,42 +19,84 @@ import { environment } from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
   isLoading = false;
   errorMessage = '';
 
   loginForm = new FormGroup({
-    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+
+    userName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3)
+    ]),
+
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8)
+    ])
   });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      this.router.navigate(['/products']);
+    }
+  }
 
   login() {
+
     if (this.loginForm.invalid) {
-      this.errorMessage = 'يرجى إدخال اسم المستخدم وكلمة المرور';
+
+      this.errorMessage =
+        'يرجى إدخال اسم المستخدم وكلمة المرور';
+
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.http.post<any>(`${environment.apiUrl}/api/Account/Login`, this.loginForm.value).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        if (data.role === 'admin') {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('auth_token', data.token); // ✅ أضيفي السطر ده
+    this.http.post<any>(
+      `${environment.apiUrl}/api/Account/Login`,
+      this.loginForm.value
+    ).subscribe({
 
-          localStorage.setItem('role', data.role);
+      next: (data) => {
+
+        this.isLoading = false;
+
+        if (data.role === 'admin') {
+
+          localStorage.setItem('token', data.token);
+
+          localStorage.setItem(
+            'role',
+            data.role
+          );
+
           this.router.navigate(['/products']);
+
         } else {
-          this.errorMessage = 'ليس لديك صلاحية الوصول';
+
+          this.errorMessage =
+            'ليس لديك صلاحية الوصول';
         }
       },
+
       error: () => {
+
         this.isLoading = false;
-        this.errorMessage = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+
+        this.errorMessage =
+          'اسم المستخدم أو كلمة المرور غير صحيحة';
       }
     });
   }
