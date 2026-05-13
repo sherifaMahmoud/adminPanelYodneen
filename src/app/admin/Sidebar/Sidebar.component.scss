@@ -141,6 +141,7 @@
 }
 
 // ===== Links =====
+// ===== Links =====
 .sidebar-links {
 
   display: flex;
@@ -190,8 +191,11 @@
   justify-content: center;
 
   font-size: 14px;
+
+  transition: .25s ease;
 }
 
+// ===== Hover =====
 .sidebar-link:hover {
 
   background: #faf7f8;
@@ -201,8 +205,30 @@
   transform: translateX(-3px);
 }
 
+.sidebar-link:hover i {
+
+  background: rgba(75, 28, 45, 0.08);
+
+  color: #4b1c2d;
+}
+
 // ===== Active =====
 .active-link {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(75, 28, 45, 0.08),
+      rgba(109, 47, 70, 0.12)
+    );
+
+  color: #4b1c2d !important;
+
+  box-shadow:
+    0 10px 24px rgba(75,28,45,.08);
+}
+
+.active-link i {
 
   background:
     linear-gradient(
@@ -211,15 +237,7 @@
       #6d2f46
     );
 
-  color: white !important;
-
-  box-shadow:
-    0 14px 28px rgba(75,28,45,.16);
-}
-
-.active-link i {
-
-  background: rgba(255,255,255,.14);
+  color: white;
 }
 
 // ===== Logout =====
